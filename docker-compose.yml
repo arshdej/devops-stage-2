@@ -51,6 +51,8 @@ services:
       - DATABASE_URL=${DATABASE_URL}
     ports:
       - "8000:8000"
+    # command: poetry run bash ./prestart.sh && poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000
+    command: tail -f /dev/null
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.api.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/api`)"
