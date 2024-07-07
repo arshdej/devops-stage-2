@@ -23,16 +23,16 @@ services:
       - "traefik.http.middlewares.redirect-to-non-www.redirectregex.permanent=true"
 
   db:
-    image: postgres:13
+    image: postgres:14-alpine
     restart: always
     environment:
-      POSTGRES_DB: app
-      POSTGRES_USER: ${DATABASE_USER}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      - POSTGRES_DB=app
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - db_data2:/var/lib/postgresql/data
     networks:
       - server
 
@@ -134,5 +134,5 @@ networks:
   server:
 
 volumes:
-  postgres_data:
+  db_data2:
   letsencrypt:
