@@ -10,6 +10,8 @@ services:
       - "4555:80"
     depends_on:
       - traefik
+    networks:
+      - server
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.frontend.rule=Host(`${DOMAIN_NAME}`) && PathPrefix(`/`)"
@@ -43,6 +45,8 @@ services:
     depends_on:
       - db
       - traefik
+    networks:
+      - server
     environment:
       - DATABASE_URL=${DATABASE_URL}
     labels:
@@ -116,8 +120,11 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.proxy-manager.rule=Host(`proxy.${DOMAIN_NAME}`)"
       - "traefik.http.routers.proxy-manager.entrypoints=websecure"
+      - "traefik.http.routers.proxy-manager.tls.certresolver=letsencrypt"
     depends_on:
       - traefik
+    networks:
+      - server
 
 networks:
   server:
