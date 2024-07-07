@@ -3,7 +3,8 @@ version: "3.8"
 services:
   frontend:
     build:
-      context: Dockerfile.frontend
+      context: .
+      dockerfile: Dockerfile.frontend
     restart: always
     labels:
       - "traefik.enable=true"
@@ -14,7 +15,8 @@ services:
 
   backend:
     build:
-      context: Dockerfile.backend
+      context: .
+      dockerfile: ./Dockerfile.backend
     restart: always
     environment:
       - DATABASE_URL=${DATABASE_URL}
