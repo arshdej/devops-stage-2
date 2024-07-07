@@ -9,7 +9,7 @@ FROM python:3.12-slim
 WORKDIR /app
 
 # Install system dependencies
-RUN apt-get update && apt-get install -y netcat curl
+RUN apt-get update && apt-get install -y curl
 
 # Install Poetry
 RUN curl -sSL https://install.python-poetry.org | python3 -
@@ -18,7 +18,7 @@ RUN curl -sSL https://install.python-poetry.org | python3 -
 ENV PATH="/root/.local/bin:$PATH"
 
 # Copy only the pyproject.toml and poetry.lock to leverage Docker cache
-COPY ./backend/pyproject.toml poetry.lock ./
+COPY ./backend/pyproject.toml ./backend/poetry.lock ./
 
 # Install dependencies
 RUN poetry install --no-root --no-dev
@@ -29,12 +29,12 @@ COPY ./backend .
 # Install the application itself
 RUN poetry install --no-dev
 
-# Install the application itself
-RUN poetry run bash ./prestart.sh
+# Set up the database with the necessary tables
+# RUN poetry run bash ./prestart.sh
 
 # Expose port 8000
 EXPOSE 8000
 
 # Default command to run the FastAPI server
-CMD ["poetry", "run", "uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
-
+# CMD ["poetry", "run", "uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# CMD ["tail", "-f",  "/dev/null"]
