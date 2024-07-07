@@ -36,9 +36,9 @@ Create a `.env` file in the root directory with the following content, adjusting
 TRAEFIK_API_INSECURE=true
 TRAEFIK_DASHBOARD_PORT=8080
 DOMAIN_NAME=yourdomain.com
-POSTGRES_DB=mydatabase
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=mysecretpassword
+POSTGRES_DB=app
+POSTGRES_USER=app
+POSTGRES_PASSWORD=changethis123
 PROXY_MANAGER_EMAIL=admin@example.com
 PROXY_MANAGER_PASSWORD=changeme
 ```
