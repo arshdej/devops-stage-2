@@ -125,8 +125,8 @@ services:
     container_name: proxy-manager
     ports:
       - "8090:81"
-      # - "80:80"
-      # - "443:443"
+      - "80:80"
+      - "443:443"
     environment:
       DB_SQLITE_FILE: "/data/database.sqlite"
     volumes:
