@@ -132,7 +132,7 @@ services:
     volumes:
       - ./proxy-data3:/data
       - ./letsencrypt3:/etc/letsencrypt
-      # - ./custom_nginx.conf:/etc/nginx/conf.d/custom_nginx.conf:ro
+      - ./custom_nginx.conf:/etc/nginx/conf.d/custom_nginx.conf:ro
     depends_on:
       - traefik
     networks:
