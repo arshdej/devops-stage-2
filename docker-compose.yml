@@ -104,9 +104,9 @@ services:
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
     ports:
-      - "80:80"
-      - "443:443"
-      - "8090:8080"
+      # - "80:80"
+      # - "443:443"
+      - "8091:8080"
     depends_on:
       - db
     networks:
@@ -124,9 +124,9 @@ services:
     restart: always
     container_name: proxy-manager
     ports:
-      - "8091:81"
-      # - "80:80"
-      # - "443:443"
+      - "8090:81"
+      - "80:80"
+      - "443:443"
     environment:
       DB_SQLITE_FILE: "/data/database.sqlite"
     volumes:
