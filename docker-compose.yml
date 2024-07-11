@@ -104,9 +104,9 @@ services:
       - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
       - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
     ports:
-      # - "80:80"
-      # - "443:443"
-      - "${TRAEFIK_DASHBOARD_PORT}:8080"
+      - "80:80"
+      - "443:443"
+      - "8090:8080"
     depends_on:
       - db
     networks:
@@ -115,7 +115,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - "./letsencrypt:/letsencrypt"
     labels:
-      - "traefik.http.routers.traefik.rule=Host(`${DOMAIN_NAME}`)"
+      - "traefik.http.routers.traefik.rule=Host(`proxy.${DOMAIN_NAME}`)"
       - "traefik.http.routers.traefik.entrypoints=websecure"
       - "traefik.http.routers.traefik.tls.certresolver=letsencrypt"
 
@@ -124,9 +124,9 @@ services:
     restart: always
     container_name: proxy-manager
     ports:
-      - "8090:81"
-      - "80:80"
-      - "443:443"
+      - "8091:81"
+      # - "80:80"
+      # - "443:443"
     environment:
       DB_SQLITE_FILE: "/data/database.sqlite"
     volumes:
